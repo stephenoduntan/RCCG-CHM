@@ -199,12 +199,12 @@ export default function ServicesPage() {
               data-name="Holy Ghost Service actions"
             >
               <Link
-              href="https://www.youtube.com/@rccglive/streams" 
+              href="https://rccgworld.org/rccg/" 
               target="_blank"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#180c62] hover:bg-[#251394] text-white text-sm font-semibold transition-all shadow-md shrink-0 cursor-pointer"
             >
               <span>Watch Online</span>
-              <ArrowRight className="size-4" />
+              <ArrowUpRight className="size-5" />
             </Link>
 
               <a

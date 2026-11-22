@@ -325,7 +325,7 @@ export function BeliefsList() {
               <button
                 type="button"
                 onClick={() => toggleItem(belief.id)}
-                className="w-full bg-[#e6e1f9] hover:bg-[#ded7f7] border-t-2 border-[#180c62] p-5 sm:p-6 flex items-center justify-between cursor-pointer select-none text-left transition-colors"
+                className="w-full bg-[#e6e1f9] hover:bg-[#ded7f7] border-t-2 border-[#d61812] p-5 sm:p-6 flex items-center justify-between cursor-pointer select-none text-left transition-colors"
                 aria-expanded={isOpen}
               >
                 <div className="flex items-center gap-3 pr-4">

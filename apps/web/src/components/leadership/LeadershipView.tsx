@@ -197,12 +197,12 @@ export function LeadershipView() {
                 className="bg-white border border-[#d0d2d6] rounded-[20px] overflow-hidden flex flex-col justify-between hover:shadow-xl transition-all duration-300 group"
               >
                 {/* Photo with Badge */}
-                <div className="relative aspect-[16/11] w-full bg-neutral-100 overflow-hidden">
+                <div className="relative aspect-[16/11] w-full bg-neutral-100 h-[360px] overflow-hidden">
                   <Image
                     src={leader.image}
                     alt={leader.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#180c62]/90 backdrop-blur-md text-white border border-white/20">

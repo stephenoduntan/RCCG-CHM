@@ -478,13 +478,13 @@ export function EventDetailsView({ event }: EventDetailsViewProps) {
         {/* ─── Divider Line (Figma node 2096:6868 top border) ───────── */}
         <div className="w-full border-t border-[#d0d2d6]" />
 
-        {/* ─── Event Overview (Figma node 2096:6868) ────────────────── */}
+        {/* ─── Event Overview ────────────────── */}
         <section
           className="w-full py-12 sm:py-16 lg:py-[72px] grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-[120px] items-start"
           data-node-id="2096:6868"
           data-name="Event overview"
         >
-          {/* About the conference (Node 2096:6869) */}
+          {/* About the conference */}
           <div
             className="lg:col-span-8 flex flex-col gap-6"
             data-node-id="2096:6869"
@@ -556,9 +556,9 @@ export function EventDetailsView({ event }: EventDetailsViewProps) {
           </div>
         </section>
 
-        {/* ─── Plan Your Visit / Join Us in Person (Node 2096:6880) ──── */}
+        {/* ─── Past Event / Photo Gallery ──── */}
         {isPastEvent ? (
-          /* ─── Event Photo Gallery (Replaces 'Join Us in Person' on Past Events ONLY) ──── */
+          /* ─── Event Photo Gallery (For past events only) ──── */
           <section id="event-gallery" className="w-full pb-16 lg:pb-24">
             <div className="w-full bg-white border border-gray-200 rounded-[24px] p-6 sm:p-10 lg:p-12 shadow-sm">
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-5 border-b border-gray-100">
@@ -599,15 +599,15 @@ export function EventDetailsView({ event }: EventDetailsViewProps) {
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      {/* <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                       <div className="absolute bottom-3 left-3 right-3 text-white">
-                        {/* <p className="text-xs font-medium text-[#c8a96e] uppercase tracking-wider">
+                        <p className="text-xs font-medium text-[#c8a96e] uppercase tracking-wider">
                           {photo.date}
-                        </p> */}
+                        </p>
                         <h4 className="font-display font-recursive-sans font-semibold text-sm line-clamp-1 group-hover:text-[#F9BAB8] transition-colors">
                           {photo.title}
                         </h4>
-                      </div>
+                      </div> */}
                       <div className="absolute top-3 right-3 size-7 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                         <Maximize2 className="size-3.5" />
                       </div>
@@ -754,8 +754,8 @@ export function EventDetailsView({ event }: EventDetailsViewProps) {
               onClick={(e) => e.stopPropagation()}
             >
               <p className="text-xs text-[#c8a96e] font-semibold uppercase">{selectedPhoto.date}</p>
-              <h4 className="font-display font-recursive-sans font-bold text-lg">{selectedPhoto.title}</h4>
-              {selectedPhoto.caption && <p className="text-xs text-gray-300">{selectedPhoto.caption}</p>}
+              <h4 className="font-display font-recursive-sans font-bold text-lg">{selectedPhoto.eventName}</h4>
+              {/* {selectedPhoto.caption && <p className="text-xs text-gray-300">{selectedPhoto.caption}</p>} */}
             </div>
           </div>
         )}

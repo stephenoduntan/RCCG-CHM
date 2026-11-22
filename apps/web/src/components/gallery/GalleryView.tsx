@@ -343,9 +343,9 @@ export function GalleryView() {
 
                     {/* Bottom Captions */}
                     <div className="absolute bottom-3 left-3 right-3 text-white z-10">
-                      <h3 className="font-display font-recursive-sans font-bold text-base sm:text-lg leading-tight line-clamp-1 group-hover:text-[#F9BAB8] transition-colors">
+                      {/* <h3 className="font-display font-recursive-sans font-bold text-base sm:text-lg leading-tight line-clamp-1 group-hover:text-[#F9BAB8] transition-colors">
                         {photo.title}
-                      </h3>
+                      </h3> */}
                       <p className="text-xs text-gray-300 line-clamp-1 mt-0.5">
                         {photo.eventName}
                       </p>
@@ -508,9 +508,9 @@ export function GalleryView() {
               )}
             </div>
 
-            <h2 className="font-display font-recursive-sans font-bold text-lg sm:text-xl text-white">
+            {/* <h2 className="font-display font-recursive-sans font-bold text-lg sm:text-xl text-white">
               {activePhoto.title}
-            </h2>
+            </h2> */}
 
             {/* {activePhoto.caption && (
               <p className="text-xs sm:text-sm text-gray-300 max-w-xl leading-relaxed">

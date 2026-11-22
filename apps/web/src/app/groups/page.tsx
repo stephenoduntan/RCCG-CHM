@@ -51,21 +51,7 @@ const groupsList: GroupItem[] = [
     imageAlt: "Redeemers Men's Fellowship at RCCG Court of His Majesty",
     isImageLeft: true,
     hasLink: false,
-    link: "#",
-  },
-  {
-    id: "hour-of-prophecy",
-    name: "Hour of Prophecy",
-    tagline: "A time for divine revelation",
-    watermark: ["HOUR OF", "PROPHETRY"],
-    description:
-      "A dedicated time for receiving prophetic words, divine guidance, and spiritual insights from the Lord.",
-    schedule: "Monthly Breakfast & Fellowship Meetings",
-    image: "./images/groups/Hour of prophecy Oct 2026 screen.webp",
-    imageAlt: "Hour of Prophecy gathering at RCCG Court of His Majesty",
-    isImageLeft: true,
-    hasLink: false,
-    link: "#",
+    link: "",
   },
   {
     id: "good-women",
@@ -79,13 +65,13 @@ const groupsList: GroupItem[] = [
     imageAlt: "Good Women fellowship at RCCG Court of His Majesty",
     isImageLeft: false,
     hasLink: false,
-    link: "#",
+    link: "",
   },
   {
     id: "yaya",
     name: "Youth & Young Adults (YAYA)",
     tagline: "Passionate generation of kingdom trailblazers",
-    watermark: ["YOUTH", "IGNITE"],
+    watermark: ["YOUTH &", "YOUNG ADULTS"],
     description:
       "Empowering students, young professionals, and creatives through relevant doctrine, career networking, and spirit-filled praise.",
     schedule: "",
@@ -93,7 +79,7 @@ const groupsList: GroupItem[] = [
     imageAlt: "Youth and Young Adults ministry at RCCG Court of His Majesty",
     isImageLeft: true,
     hasLink: false,
-    link: "#",
+    link: "",
   },
   {
     id: "teens-church",
@@ -107,7 +93,7 @@ const groupsList: GroupItem[] = [
     imageAlt: "Teens and Junior Church at RCCG Court of His Majesty",
     isImageLeft: false,
     hasLink: false,
-    link: "#",
+    link: "",
   },
   {
     id: "women-on-their-knees",
@@ -123,6 +109,20 @@ const groupsList: GroupItem[] = [
     hasLink: true,
     link: "https://facebook.com/womenontheirkneespraying",
   },
+  {
+    id: "hour-of-prophecy",
+    name: "Hour of Prophecy",
+    tagline: "A time for divine revelation",
+    watermark: ["HOUR OF", "PROPHECY"],
+    description:
+      "A dedicated time for receiving prophetic words, divine guidance, and spiritual insights from the Lord.",
+    schedule: "Monthly Meetings",
+    image: "./images/groups/Hour of prophecy Oct 2026 screen.webp",
+    imageAlt: "Hour of Prophecy gathering at RCCG Court of His Majesty",
+    isImageLeft: false,
+    hasLink: false,
+    link: "",
+  }
 ];
 
 export default function GroupsPage() {
@@ -140,9 +140,9 @@ export default function GroupsPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#051202] via-[#051202]/70 to-transparent" />
 
         <Container className="relative z-10 text-center py-20">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#c8a96e]/20 border border-[#c8a96e]/40 text-[#c8a96e] text-xs font-semibold uppercase tracking-wider mb-4">
+          {/* <span className="inline-block px-4 py-1.5 rounded-full bg-[#c8a96e]/20 border border-[#c8a96e]/40 text-[#c8a96e] text-xs font-semibold uppercase tracking-wider mb-4">
             Fellowship & Connection
-          </span>
+          </span> */}
           <h1 className="font-display font-recursive-sans text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 uppercase tracking-tight">
             Groups & Fellowships
           </h1>
@@ -157,9 +157,9 @@ export default function GroupsPage() {
         <Container className="max-w-[1440px] w-full">
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-14 lg:mb-16">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#d61812] bg-[#d61812]/10 px-3.5 py-1.5 rounded-full inline-block mb-3">
+            {/* <span className="text-xs font-semibold uppercase tracking-wider text-[#d61812] bg-[#d61812]/10 px-3.5 py-1.5 rounded-full inline-block mb-3">
               Circles of Life
-            </span>
+            </span> */}
             <h2 className="font-display font-recursive-sans font-bold text-3xl sm:text-4xl lg:text-5xl text-[#0a0a0a] tracking-tight">
               Our Community Groups
             </h2>
@@ -245,12 +245,12 @@ export default function GroupsPage() {
           </div>
 
           {/* ─── Join a Fellowship Callout ─────────────────────────── */}
-          <div className="mt-16 sm:mt-20 p-8 sm:p-12 rounded-[28px] bg-[#051202] text-white text-center relative overflow-hidden shadow-xl">
+          <div className="mt-20 sm:mt-20 p-8 sm:p-12 rounded-[28px] bg-[#051202] text-white text-center relative overflow-hidden shadow-xl">
             <div className="relative z-10 max-w-2xl mx-auto">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#c8a96e]/20 border border-[#c8a96e]/40 text-[#c8a96e] text-xs font-semibold uppercase tracking-wider mb-3">
+              {/* <span className="inline-block px-4 py-3 rounded-full bg-[#c8a96e]/20 border border-[#c8a96e]/40 text-[#c8a96e] text-xs font-semibold uppercase tracking-wider mb-3">
                 Need Help Finding a Center?
-              </span>
-              <h3 className="font-display font-recursive-sans font-bold text-2xl sm:text-3xl lg:text-4xl mb-4">
+              </span> */}
+              <h3 className="font-display font-recursive-sans font-bold text-2xl sm:text-3xl lg:text-4xl mb-8">
                 Looking for a House Fellowship Near You?
               </h3>
               {/* <p className="text-gray-300 text-sm sm:text-base mb-8 leading-relaxed">
