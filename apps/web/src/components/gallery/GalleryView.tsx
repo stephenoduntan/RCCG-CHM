@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -58,6 +58,62 @@ export function GalleryView() {
     });
     return ["All", ...Array.from(set).sort((a, b) => b - a).map(String)];
   }, [galleryImages]);
+
+  // Filter pills container overflow & scroll navigation (for laptop/desktop)
+  const pillsContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [hasOverflow, setHasOverflow] = useState(false);
+
+  const updateScrollState = useCallback(() => {
+    const el = pillsContainerRef.current;
+    if (!el) return;
+    const tolerance = 2;
+    const overflow = el.scrollWidth > el.clientWidth + tolerance;
+    setHasOverflow(overflow);
+    setCanScrollLeft(el.scrollLeft > tolerance);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - tolerance);
+  }, []);
+
+  useEffect(() => {
+    const el = pillsContainerRef.current;
+    if (!el) return;
+
+    updateScrollState();
+
+    const handleScroll = () => {
+      updateScrollState();
+    };
+
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateScrollState);
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        updateScrollState();
+      });
+      resizeObserver.observe(el);
+    }
+
+    return () => {
+      el.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateScrollState);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+    };
+  }, [updateScrollState, tags]);
+
+  const handleScrollPills = (direction: "left" | "right") => {
+    const el = pillsContainerRef.current;
+    if (!el) return;
+    const scrollDistance = Math.max(220, Math.floor(el.clientWidth * 0.65));
+    el.scrollBy({
+      left: direction === "left" ? -scrollDistance : scrollDistance,
+      behavior: "smooth",
+    });
+  };
 
   // Filter & sort images
   const filteredImages = useMemo(() => {
@@ -263,37 +319,77 @@ export function GalleryView() {
               </div>
             </div>
 
-            {/* Bottom row: Horizontal Event Tag Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 scrollbar-none">
-              {tags.map((tag) => {
-                const isSelected = selectedTag.toLowerCase() === tag.toLowerCase();
-                const count =
-                  tag === "All"
-                    ? galleryImages.length
-                    : galleryImages.filter((img) => img.eventTag.toLowerCase() === tag.toLowerCase()).length;
+            {/* Bottom row: Horizontal Event Tag Pills with Arrow Navigation */}
+            <div className="relative flex items-center gap-1.5 w-full">
+              {/* Left Navigation Arrow */}
+              {hasOverflow && (
+                <button
+                  type="button"
+                  onClick={() => handleScrollPills("left")}
+                  disabled={!canScrollLeft}
+                  aria-label="Scroll filter pills left"
+                  className={`hidden md:flex size-8 rounded-full items-center justify-center border border-gray-200 bg-white hover:bg-gray-100 text-[#0a0a0a] shadow-xs transition-all shrink-0 cursor-pointer ${
+                    canScrollLeft
+                      ? "opacity-100 hover:scale-105 active:scale-95 text-[#180c62] border-[#b2a1ed]/60"
+                      : "opacity-25 cursor-not-allowed pointer-events-none text-gray-400"
+                  }`}
+                >
+                  <ChevronLeft className="size-4" />
+                </button>
+              )}
 
-                return (
-                  <button
-                    key={tag}
-                    type="button"
-                    onClick={() => setSelectedTag(tag)}
-                    className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${
-                      isSelected
-                        ? "bg-[#180c62] text-white shadow-sm"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    <span>{tag}</span>
-                    <span
-                      className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                        isSelected ? "bg-white/20 text-white" : "bg-gray-200 text-gray-600"
+              {/* Pills Scroll Container */}
+              <div
+                ref={pillsContainerRef}
+                className="flex-1 flex items-center gap-2 overflow-x-auto pb-1 pt-1 scrollbar-none scroll-smooth"
+              >
+                {tags.map((tag) => {
+                  const isSelected = selectedTag.toLowerCase() === tag.toLowerCase();
+                  const count =
+                    tag === "All"
+                      ? galleryImages.length
+                      : galleryImages.filter((img) => img.eventTag.toLowerCase() === tag.toLowerCase()).length;
+
+                  return (
+                    <button
+                      key={tag}
+                      type="button"
+                      onClick={() => setSelectedTag(tag)}
+                      className={`whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 shrink-0 ${
+                        isSelected
+                          ? "bg-[#180c62] text-white shadow-sm"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
                     >
-                      {count}
-                    </span>
-                  </button>
-                );
-              })}
+                      <span>{tag}</span>
+                      <span
+                        className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                          isSelected ? "bg-white/20 text-white" : "bg-gray-200 text-gray-600"
+                        }`}
+                      >
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Right Navigation Arrow */}
+              {hasOverflow && (
+                <button
+                  type="button"
+                  onClick={() => handleScrollPills("right")}
+                  disabled={!canScrollRight}
+                  aria-label="Scroll filter pills right"
+                  className={`hidden md:flex size-8 rounded-full items-center justify-center border border-gray-200 bg-white hover:bg-gray-100 text-[#0a0a0a] shadow-xs transition-all shrink-0 cursor-pointer ${
+                    canScrollRight
+                      ? "opacity-100 hover:scale-105 active:scale-95 text-[#180c62] border-[#b2a1ed]/60"
+                      : "opacity-25 cursor-not-allowed pointer-events-none text-gray-400"
+                  }`}
+                >
+                  <ChevronRight className="size-4" />
+                </button>
+              )}
             </div>
           </div>
         </Container>
